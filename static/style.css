@@ -1,0 +1,21 @@
+*{
+    margin: 0px auto;
+}
+
+.topbox {
+    display: flex;
+    margin-right: 1085px;
+}
+
+.row{
+    --bs-gutter-x: 0rem
+}
+
+.activities_title{
+    margin-left: 30px;
+}
+
+
+#win {
+    padding-left: 30px;
+}

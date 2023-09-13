@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ninja Gold</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" 
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/style.css') }}">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" 
+        crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container-lg">
+        <div class="topbox mt-4">
+            <h4>Total Gold: {{session['total_gold']}}</h4>
+        </div>
+        <p class="text-primary" id="win"> *Venture in to 4 different locations, work to accumulate 200 gold pieces in less than 16 moves using the casino button 3 times*</p> 
+            {% if session['total_gold'] >= 200 %}
+                <h2 class="text-success text-lg-center"> SUCCESS! You won! Reset your wallet to play again?</h2>
+                <a href="/clearSession">
+                    <h5 class="text-lg-center"><button id="/clearSession">Restart Your Wallet</button></h5>
+                </a>
+            {% endif %}
+        <div class="container-custom my-4">
+            <div class="row">
+                <div class="col-12 col-sm-3 mb-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Farm</h5>
+                            <p class="card-text">(Earns 10-20 Gold)</p>
+                            <form action="/process_money" method="post">
+                                <input name="property" type="hidden" value="farm"><br><!--These are key and value pairs, since its a hidden input the name is the key and the value is the value matching to my server.py-->
+                                <button type="submit">Find Gold!</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3 mb-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Cave</h5>
+                            <p class="card-text">(Earns 5-10 Gold)</p>
+                            <form action="/process_money" method="post">
+                                <input name="property" type="hidden" value="cave"><br>
+                                <button type="submit">Find Gold!</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3 mb-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">House</h5>
+                            <p class="card-text">(Earns 2-5 Gold)</p>
+                            <form action="/process_money" method="post">
+                                <input name="property" type="hidden" value="house"><br>
+                                <button type="submit">Find Gold!</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3 mb-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">casino</h5>
+                            <p class="card-text">(Earns/takes 0-50 Gold)</p>
+                            <form action="/process_money" method="post">
+                                <input name="property" type="hidden" value="casino"><br>
+                                <button type="submit">Find Gold!</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <h5 class="activities_title">Activities:</h5>
+                <div class="card" style="width: 87rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <p class="card-text">{{session['rounds']| safe}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br></br>
+    </div>
+</body>
+</html>
+
